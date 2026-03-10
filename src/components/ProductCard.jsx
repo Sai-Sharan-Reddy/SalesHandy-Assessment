@@ -23,7 +23,7 @@ function ProductCard({ product }) {
         </div>
         <div className="product-footer">
           <strong>{formatCurrency(product.price)}</strong>
-          <button onClick={() => addToCart(product, 1)} className="button button-primary">
+          <button disabled={product.stock === 0} onClick={() => addToCart(product, 1)} className="button button-primary">
             Add to cart
           </button>
         </div>

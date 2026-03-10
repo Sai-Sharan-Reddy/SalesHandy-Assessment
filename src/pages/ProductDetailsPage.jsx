@@ -8,7 +8,7 @@ import { formatCurrency } from '../utils/currency';
 function ProductDetailsPage() {
   const { id } = useParams();
   const product = useMemo(() => products.find((item) => item.id === Number(id)), [id]);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(product?.stock > 0 ? 1 : 0);
   const { addToCart } = useCart();
 
   if (!product) {
@@ -61,9 +61,15 @@ function ProductDetailsPage() {
               onDecrease={() => setQuantity((current) => Math.max(1, current - 1))}
               onIncrease={() => setQuantity((current) => Math.min(product.stock, current + 1))}
               max={product.stock}
+              stock={product.stock}
+              disabled={product.stock === 0}
             />
-            <button className="button button-primary" onClick={() => addToCart(product, quantity)}>
-              Add {quantity} to cart
+            <button 
+              className="button button-primary" 
+              onClick={() => addToCart(product, quantity)}
+              disabled={product.stock === 0}
+            >
+              {product.stock === 0 ? 'Out of Stock' : `Add ${quantity} to cart`}
             </button>
           </div>
         </div>
@@ -73,24 +79,30 @@ function ProductDetailsPage() {
         <div className="section-heading">
           <h2>You may also like</h2>
         </div>
-        <div className="product-grid compact-grid">
-          {relatedProducts.map((item) => (
-            <article key={item.id} className="product-card compact-card">
-              <Link to={`/product/${item.id}`} className="product-media compact-media">
-                <img src={item.image} alt={item.name} loading="lazy" />
-              </Link>
-              <div className="product-body">
-                <p className="product-category">{item.category}</p>
-                <Link to={`/product/${item.id}`} className="product-name">
-                  {item.name}
+        {relatedProducts.length > 0 ? (
+          <div className="product-grid compact-grid">
+            {relatedProducts.map((item) => (
+              <article key={item.id} className="product-card compact-card">
+                <Link to={`/product/${item.id}`} className="product-media compact-media">
+                  <img src={item.image} alt={item.name} loading="lazy" />
                 </Link>
-                <div className="product-footer">
-                  <strong>{formatCurrency(item.price)}</strong>
+                <div className="product-body">
+                  <p className="product-category">{item.category}</p>
+                  <Link to={`/product/${item.id}`} className="product-name">
+                    {item.name}
+                  </Link>
+                  <div className="product-footer">
+                    <strong>{formatCurrency(item.price)}</strong>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p style={{ color: 'var(--muted)', textAlign: 'center', padding: '20px 0' }}>
+            No other products in this category.
+          </p>
+        )}
       </section>
     </div>
   );

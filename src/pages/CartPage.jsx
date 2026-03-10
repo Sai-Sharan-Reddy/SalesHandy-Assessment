@@ -35,9 +35,11 @@ function CartPage() {
 
               <QuantitySelector
                 value={item.quantity}
-                onDecrease={() => updateQuantity(item.id, item.quantity - 1)}
-                onIncrease={() => updateQuantity(item.id, item.quantity + 1)}
+                onDecrease={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                onIncrease={() => updateQuantity(item.id, Math.min(item.stock, item.quantity + 1))}
                 max={item.stock}
+                stock={item.stock}
+                disabled={item.stock === 0}
               />
 
               <div className="cart-item-actions">

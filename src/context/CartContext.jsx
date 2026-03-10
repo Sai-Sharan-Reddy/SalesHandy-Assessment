@@ -1,13 +1,31 @@
 import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import { products } from '../data/products';
 
 const CartContext = createContext(null);
 
 const CART_STORAGE_KEY = 'shopsphere-cart';
 
+function validateCartItem(item) {
+  // Check if product still exists
+  const product = products.find((p) => p.id === item.id);
+  if (!product) return null;
+  
+  // Validate quantity doesn't exceed current stock
+  const validQuantity = Math.min(item.quantity, product.stock);
+  if (validQuantity <= 0) return null; // Remove if stock is 0
+  
+  return { ...item, quantity: validQuantity, stock: product.stock };
+}
+
 function cartReducer(state, action) {
   switch (action.type) {
-    case 'LOAD_CART':
-      return action.payload;
+    case 'LOAD_CART': {
+      // Validate all items when loading from storage
+      const validatedItems = action.payload.items
+        .map(validateCartItem)
+        .filter((item) => item !== null);
+      return { items: validatedItems };
+    }
     case 'ADD_ITEM': {
       const existingItem = state.items.find((item) => item.id === action.payload.id);
       if (existingItem) {
