@@ -72,4 +72,4 @@ It creates a more complete shopping experience by separating the catalog, produc
 
 ## Submission Notes
 
-This project was built specifically to satisfy the assignment requirement of a fully functional e-commerce application using React and JavaScript, without TypeScript or Next.js.
+This project was built specifically as a fully functional e-commerce application using React and JavaScript.
