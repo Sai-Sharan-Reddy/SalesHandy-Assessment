@@ -341,7 +341,6 @@ button {
 .product-footer,
 .summary-row,
 .details-meta,
-.section-heading,
 .footer-content,
 .success-actions {
   display: flex;
@@ -665,7 +664,7 @@ button {
 .site-footer {
   border-top: 1px solid var(--border);
   padding: 22px 0;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgb(219 219 219 / 78%)
 }
 
 .footer-content {

@@ -59,7 +59,7 @@ function CheckoutPage() {
       <section className="form-card">
         <div className="section-heading">
           <h1>Checkout</h1>
-          <p>Complete the mock checkout flow by entering your shipping details.</p>
+          <p>Complete your order by entering your shipping details.</p>
         </div>
 
         <form className="checkout-form" onSubmit={handleSubmit} noValidate>
