@@ -5,7 +5,7 @@ function Hero() {
         <p className="eyebrow">Shopping experience like never before.</p>
         <h1>Discover products that feel thoughtfully chosen.</h1>
         <p className="hero-copy">
-          Browse a polished catalog, filter with ease, manage your cart, and complete a mock checkout flow.
+          Browse for products and add them to your cart to buy with secure payment methods, now or later.
         </p>
       </div>
       <div className="hero-metrics">
