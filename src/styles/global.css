@@ -270,6 +270,8 @@ button {
 
 .product-card {
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-media {
@@ -743,7 +745,6 @@ button {
 
   .details-actions,
   .success-actions,
-  .product-footer,
   .product-meta,
   .section-heading,
   .footer-content {
