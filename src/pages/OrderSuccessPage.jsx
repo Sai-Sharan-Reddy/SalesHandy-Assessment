@@ -9,7 +9,7 @@ function OrderSuccessPage() {
       <section className="success-card">
         <div className="success-icon">✓</div>
         <h1>Thanks, {customerName}!</h1>
-        <p>Your order has been placed successfully. This is a mock checkout confirmation for the assessment.</p>
+        <p>Your order has been placed successfully.</p>
         <div className="success-actions">
           <Link to="/" className="button button-primary">Continue shopping</Link>
           <Link to="/cart" className="button button-secondary">View cart</Link>
